@@ -26,11 +26,11 @@ namespace Resume
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<CVContext>();
-                    context.Database.EnsureCreated();
+                    var context = services.GetRequiredService<DBContext>();
+                    DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
-                {
+                a{
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred creating the DB.");
                 }
