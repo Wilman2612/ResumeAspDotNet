@@ -15,7 +15,9 @@ namespace Resume.Controllers
 {
 	public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+		private const string LNG_COOKIE = "Language";
+		private const string US_FORMAT = "En-US";
+		private readonly ILogger<HomeController> _logger;
         private readonly DBContext _context;
 
         public HomeController(ILogger<HomeController> logger, DBContext context)
@@ -31,7 +33,8 @@ namespace Resume.Controllers
 					.ThenInclude(z => z.JobResponsibility)
 					.ThenInclude(x => x.Job)
 				.FirstOrDefaultAsync(x => x.Id == code);
-			var language = LanguageName.Spanish;
+			
+			var language = GetLanguage();
 			var data = new CompleteCVData
 			{
 				Id = code,
@@ -40,6 +43,12 @@ namespace Resume.Controllers
 				Jobs = GetJobsTranslated(defaultCV, language)
 			};
 			return View(data);
+		}
+
+		private LanguageName GetLanguage()
+		{
+			var cookieLng = Request.Cookies[LNG_COOKIE] ?? US_FORMAT;
+			return cookieLng == US_FORMAT ? LanguageName.English : LanguageName.Spanish;
 		}
 
 		private static List<JobTranslated> GetJobsTranslated(CVModel defaultCV, LanguageName language)

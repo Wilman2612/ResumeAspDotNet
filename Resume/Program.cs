@@ -30,7 +30,7 @@ namespace Resume
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
-                a{
+                {
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred creating the DB.");
                 }

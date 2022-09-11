@@ -176,7 +176,18 @@
       return false;
    });
 
+     $('#nav .dropdown-menu a').click(function () {
+         let lng = $(this).html() === "English" ? "En-US" : "Es-PE";
+         setCookie("Language", lng, 365);
+         window.location.reload()
+     });
 
+     function setCookie(cname, cvalue, exdays) {
+         var d = new Date();
+         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+         var expires = "expires=" + d.toUTCString();
+         document.cookie = cname + "=" + cvalue + "; " + expires;
+     }
 });
 
 

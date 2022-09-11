@@ -146,13 +146,13 @@ header .scrolldown a:hover { color: #11ABB0; }
 #nav-wrap > a.mobile-btn { display: none; }
 
 ul#nav {
-   min-height: 48px;
-   width: auto;
-
-   /* center align the menu */
-   text-align: center;
+	min-height: 48px;
+	width: auto;
+	/* center align the menu */
+	text-align: center;
+	justify-content : center
 }
-ul#nav li {
+ul#nav > li {
    position: relative;
    list-style: none;
    height: 48px;
@@ -691,6 +691,7 @@ call-to-action .button {
    display: block;
    font-size: 12px;
    font-style: normal;
+   line-height: 18px;
    line-height: 18px;
    color: #fff;
 }
